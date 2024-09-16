@@ -90,10 +90,38 @@ def shortest_path(source, target):
     that connect the source to the target.
 
     If no possible path, returns None.
-    """
 
-    # TODO
-    raise NotImplementedError
+    NOTE: source, and target are both strings that are
+    the person_id of the source and target person.
+    """
+    
+    # base cases
+    # - check if source has worked with the target in a movie directly
+    # - if source or target is null then return null
+
+    if source is None or target is None:
+        return None
+    
+    actors_who_starred_in_movie_with_source_person_id = neighbors_for_person(source)
+
+
+    target_m_id_and_p_id = None
+    for movie_id, person_id in actors_who_starred_in_movie_with_source_person_id:
+        if person_id == target:
+            target_m_id_and_p_id = (movie_id, person_id)
+            break
+
+    if target_m_id_and_p_id is not None:
+        return [(target_m_id_and_p_id[0], target_m_id_and_p_id[1])]
+
+    # otherwise we will use BFS to find the shortest path
+    # @TODO: implement WE NEED A QUEUE SOMEWHERE HERE
+
+    # add all people to a queue
+
+    # otherwise no path exists
+    return None
+    
 
 
 def person_id_for_name(name):
